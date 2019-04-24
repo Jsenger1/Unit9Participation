@@ -1,6 +1,7 @@
 package css.unit9participation;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -105,17 +106,39 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_add) {
+            Snackbar.make(getWindow().getDecorView(), "Add study mates not implemented yet", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
-        } else if (id == R.id.nav_slideshow) {
+        }
+        if (id == R.id.nav_delete) {
+            Snackbar.make(getWindow().getDecorView(), "Delete study mates not implemented yet", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
 
-        } else if (id == R.id.nav_manage) {
+        }
+        if (id == R.id.nav_email) {
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setType("*/*");
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Hey Study Partner");
+            if(emailIntent.resolveActivity(getPackageManager()) != null){
+                startActivity(emailIntent);
+            }
 
-        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        }
+        if (id == R.id.nav_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+
+        }
+        if (id == R.id.nav_sms) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setData(Uri.parse("smsto:"));  // This ensures only SMS apps respond
+            intent.putExtra("sms_body", "Hello Study Mate");
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
 
         }
 
